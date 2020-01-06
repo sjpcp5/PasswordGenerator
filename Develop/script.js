@@ -19,15 +19,9 @@ var promptSpecialcharac = confirm("Do you want special characters? ");
 var promptNumbers = confirm("Do you want numbers characters? ");
 var promptPassLength = prompt("How long do you want the password to be? ");
  
-  generateBtn.addEventListener("click", btnCallback);
-    function btnCallback (evt) {
-      btnCallback = passwordEl
-    console.log(evt.target)
-  };
-
     function getRandomUpper(){
       return String.fromCharCode(Math.floor(Math.random() * 26) + 65);
-    };
+      };
 
     function getRandomLower() {
       return String.fromCharCode(Math.floor(Math.random() * 26) + 97);
@@ -51,35 +45,40 @@ var promptPassLength = prompt("How long do you want the password to be? ");
   console.log("The users password length is..", + promptPassLength + " The user chose " + " UC ", + promptUppercase + " LC ", + promptLowercase + " Num ", + promptNumbers + " Special ", + promptSpecialcharac,);
 
 // for loop and array that gathers all confirmed funcitons to create password
+generatePass();
+
 function generatePass(){
-  var passwordString = ''
+  var passwordString = localStorage.getItem("passwordString")
+
   for (var i = 0; i < promptPassLength; i++) {
     var possibleChars = []
     // if they want upper case add one to possibleChars
-    if (promptUppercase == 1) {
-      getRandomUpper()
-    possibleChars.push()
-    console.log(possibleChars)
+    if (promptUppercase === 1) {
+      possibleChars.push(getRandomUpper());
+      
     };
     // if they want lower case ...
     if (promptLowercase == 1) {
-  
+    possibleChars.push(getRandomLower());
+    
     };
     // if they want symbols ....
-    if (promptNumbers == 1) {
+    if (promptSpecialcharac == 1) {
+    possibleChars.push(getSpecialCharc());
   
     };
-    // if they want numbers ...
-    if (promptSpecialcharac == 1) {
-    
-
+    // if they want num ...
+    if (promptNumbers == 1) {
+    possibleChars.push(getRandomNumber());
     };
 
     let randomChoice = Math.random() * possibleChars.length
-    passwordString += possibleChars[randomChoice]
+    passwordString += possibleChars[randomChoice];
+  
   }; 
-  console.log() 
-  };
+  passwordEl.textContent = passwordString;
+  console.log(passwordString);  
+}
 // Write password to the #password input
 // function writePassword() {
 //   var passwordEL = generatePassword();
@@ -90,17 +89,41 @@ function generatePass(){
 //   arrayPass();
 // };
 
-function copyToClipboard() {
-  // BONUS 
-};
+
 
 // Add event listener to generate button
-generateBtn.addEventListener("click", arrayPass);
-generateBtn.addEventListener("click", btnCallback);
-function btnCallback (evt) {
-  const rnd = arrayPass();
-  .append(rnd);
 
-  console.log(evt.target);
-  
+generateBtn.addEventListener("click", function(event){
+    event.preventDefault();
+    var passwordString = document.querySelector('#password').nodeValue;
+
+    passwordEl.append(passwordString);
+    localStorage.setItem(passwordString);
+    generatePass();
+    
+    
+    
+
+    if (passwordString === "");{
+      displayMessgae("error", "password length cannot be blank");
+    };
+    
+    
+    
+
+    console.log(generateBtn)
+});
+
+
+function newFunction() {
+  return String.passwordString;
 }
+// generateBtn.addEventListener("click", arrayPass);
+// generateBtn.addEventListener("click", btnCallback);
+// function btnCallback (evt) {
+//   const rnd = arrayPass();
+//   .append(rnd);
+
+//   console.log(evt.target);
+  
+// }
