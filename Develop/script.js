@@ -57,7 +57,9 @@ function generatePass(){
     var possibleChars = []
     // if they want upper case add one to possibleChars
     if (promptUppercase == 1) {
+      getRandomUpper()
     possibleChars.push()
+    console.log(possibleChars)
     };
     // if they want lower case ...
     if (promptLowercase == 1) {
