@@ -50,8 +50,8 @@ var passwordString = toString("")
 generatePass();
 
 function generatePass(){
- passwordString = ""
-  passwordString = localStorage.getItem("passwordString")
+  passwordString = ""
+  passwordEl = localStorage.getItem("passwordString")
   // if (promptUppercase === 1); || if (promptLowercase === 1); || if (promptSpecialcharac === 1); || if (promptNumbers === 1) {};
 
   for (var i = 0; i < promptPassLength; i++) {
@@ -75,16 +75,19 @@ function generatePass(){
 
     getRandomNumber()
     possibleChars.push(getRandomNumber());
-    
 
+    
+  };
     let randomChoice = Math.random() * possibleChars.length
     passwordString += possibleChars[randomChoice];
-    return String.passwordString };
+    passwordEl.textContent = 'passwordString';
    
-  passwordEl.textContent = passwordString;
-  console.log("this is my chosen password...", passwordString);
+  
+   
+  
 };
 
+  console.log("this is my chosen password...", passwordString);
 // Write password to the #password input
 // function writePassword() {
 //   var passwordEL = generatePassword();
@@ -100,11 +103,10 @@ function generatePass(){
 // Add event listener to generate button
 
 generateBtn.addEventListener("click",this, false); {
-
-passwordString = localStorage.getItem("passwordString")
-localStorage.setItem(passwordString);
-passwordEl.append(passwordString);
-generatePass();
+  passwordEl.append(passwordString);
+  localStorage.setItem('passwordString');
+  
+  generatePass();
 
     console.log(generateBtn)
 };
