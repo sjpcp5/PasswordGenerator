@@ -23,15 +23,18 @@ var promptPassLength = prompt("How long do you want the password to be? ");
     lower: getRandomLower(),
     number: getRandomNumber(),
     symbol: getSpecialCharc(),
-    length: promptPassLength,
+    length1: promptPassLength,
   };
+  
+  console.log(upper, lower, number, symbol, length);
 
   const length = +promptPassLength.value;
   const wantsUpper = promptUppercase;
   const wantsLower = promptLowercase;
   const wantsNumber = promptNumbers;
   const wantsSpecChar = promptSpecialcharac;
-
+  console.log(length, wantsLower, wantsSpecChar, wantsNumber, wantsUpper);
+ 
   generateBtn.addEventListener("click", () => {
     passwordEl.innerText = generatePass(wantsUpper, wantsLower, wantsSpecChar, wantsNumber, length);
   });
@@ -41,7 +44,8 @@ var promptPassLength = prompt("How long do you want the password to be? ");
     const typesCounted = upper + lower + number + symbol;
     const possibleChars = [{ lower }, {upper}, {number}, {symbol}].filter(item =>
       Object.values(item)[0]);
-
+  console.log(passwordString);
+  console.log(possibleChars);
       // If type canceled
       // if(typesCounted === false) {
       //   return '',
@@ -51,12 +55,15 @@ var promptPassLength = prompt("How long do you want the password to be? ");
       possibleChars.forEach(type => {
         const funcName = Object.keys(type)[0];
         generatePass += randomFunc[funcName]();
+        console.log(possibleChars);
       });
     } 
     const chosenPassword = passwordString.slice(0,length);
-    
+    console.log(chosenPassword);
     return chosenPassword;
   }
+  console.log(generatePass());
+  
   function getRandomUpper(){
     return String.fromCharCode(Math.floor(Math.random() * 26) + 65);
     };
