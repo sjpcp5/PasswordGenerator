@@ -10,48 +10,48 @@
 var generateBtn = document.querySelector("#generate");
 var passwordEl = document.querySelector("#password");
 // function to prompt user for password options
-function checkUserResponse(){
+function checkUserResponse() {
 
-var promptPassLength = parseInt(prompt("How long do you want the password to be? "));
-console.log(promptUppercase);
-console.log(promptPassLength);
+  var promptPassLength = parseInt(prompt("How long do you want the password to be? "));
+  console.log(promptPassLength);
 
 
-if (isNan(promptPassLength)===true){
-  alert("Password length must be provided as a number");
-  return;
-}
+  if (isNaN(promptPassLength) === true) {
+    alert("Password length must be provided as a number");
+    return;
+  }
 
-if (promptPassLength < 8) {
-  alert("Password length must be at least 8 characters");
-  return;
-}
-if (promptPassLength > 128) {
-  alert("Password length must less than 129 characters");
-  return;
-}
-var promptUppercase = confirm("Do you want uppercase characters? ");
-var promptLowercase = confirm("Do you want lowercase characters? ");
-var promptSpecialcharac = confirm("Do you want special characters? ");
-var promptNumbers = confirm("Do you want numbers characters? ");
+  if (promptPassLength < 8) {
+    alert("Password length must be at least 8 characters");
+    return;
+  }
+  if (promptPassLength > 128) {
+    alert("Password length must less than 129 characters");
+    return;
+  }
+  var promptUppercase = confirm("Do you want uppercase characters? ");
+  console.log(promptUppercase);
+  var promptLowercase = confirm("Do you want lowercase characters? ");
+  var promptSpecialcharac = confirm("Do you want special characters? ");
+  var promptNumbers = confirm("Do you want numbers characters? ");
 
-if (
-  promptLowercase === false &&
-  promptUppercase === false &&
-  promptNumbers === false &&
-  promptSpecialcharac === false
-) {
-  alert("Must select at least one character type");
-  return;
-};
-var passOptions ={
-  promptPassLength: promptPassLength,
-  promptLowercase: promptSpecialcharac,
-  promptNumbers: promptNumbers,
-  promptSpecialcharac: promptSpecialcharac,
-  promptUppercase: promptUppercase,
-};
-return passOptions; 
+  if (
+    promptLowercase === false &&
+    promptUppercase === false &&
+    promptNumbers === false &&
+    promptSpecialcharac === false
+  ) {
+    alert("Must select at least one character type");
+    return;
+  };
+  var passOptions = {
+    promptPassLength: promptPassLength,
+    promptLowercase: promptSpecialcharac,
+    promptNumbers: promptNumbers,
+    promptSpecialcharac: promptSpecialcharac,
+    promptUppercase: promptUppercase,
+  };
+  return passOptions;
 };
 
 //console log for enitre if funtions and confirms working together
@@ -169,23 +169,26 @@ function getSpecialCharc() {
   return randomSpecialChar;
 };
 
-// console.log(getRandomLower(), getRandomNumber(), getSpecialCharc(), getRandomUpper());
-/*function addFromArray(){
-  return possibleChars.append(passwordString)
-};*/
 
+function getAnyRandom(arr) {
+  var randIndex = Math.floor(Math.random() * arr.length);
+  var randThing = arr[randIndex];
+
+  return randThing;
+}
 
 
 //functions to generate user's password
 // for loop and array that gathers all confirmed funcitons to create password
 //utilize arrays and math.random to generate a password
 function generatePass() {
-  var options = checkUserResponse(); 
-  var passwordString = "";
-  console.log(passwordString);
+  var options = checkUserResponse();
+ 
   //passwordEl = localStorage.getItem("passwordString")
+  var result = [];
   var possibleChars = [];
   var guaranteedCharacters = [];
+
   // if they want upper case add one to possibleChars
   if (options.promptUppercase) {
     possibleChars = possibleChars.concat(upperCasedCharacters);
@@ -219,48 +222,28 @@ function generatePass() {
     console.log(guaranteedCharacters)
   }
 
-  for (var i = 0; i < promptPassLength; i++) {
+  for (var i = 0; i < options.promptPassLength; i++) {
+   let singleChar = getAnyRandom(possibleChars);
     /* let randomIndex = Math.floor(Math.random() * possibleChars.length)
     var passwordString = + possibleChars[randomIndex]; */
-    console.log(promptPassLength);
-    console.log(passwordString);
-  };
-
-  passwordEl.innerText = passwordString;
+   result.push(singleChar);
+  }
+  // mixing in on of each character into the result
+  for (var i= 0; i < guaranteedCharacters.promptPassLength; i++){
+    result[i]=guaranteedCharacters[i];
+  }
+  return result.join("");
 };
 
-// console.log("this is my array..", possibleChars);
-// console.log("what is my ", randomChoice);
-
-// if (promptUppercase === 1 || promptLowercase === 1 || promptSpecialcharac === 1 || promptNumbers === 1) {
-//   addFromArray();
-// }
-
-// console.log("this is my chosen password...", passwordString);
-// Write password to the #password input
-// function writePassword() {
-//   var passwordEL = generatePassword();
-//     passwordText.value = passwordEL;
-
-//   copyBtn.removeAttribute("disabled");
-//   copyBtn.focus();
-//   arrayPass();
-// };
-
-
+function writePassword(){
+var password = generatePass();
+passwordEl.value = password;
+console.log(password);
+};
 
 // Add event listener to generate button
-// console.log(generateBtn)
-generateBtn.addEventListener("click", generatePass);
+
+generateBtn.addEventListener("click", writePassword);
 
 
 
-// generateBtn.addEventListener("click", arrayPass);
-// generateBtn.addEventListener("click", btnCallback);
-// function btnCallback (evt) {
-//   const rnd = arrayPass();
-//   .append(rnd);
-
-//   console.log(evt.target);
-
-// }
