@@ -6,12 +6,10 @@
 //does the user want special characters
 //does the user want numbers
 //how long does the user want the password to be
-
-
 //variables
 var generateBtn = document.querySelector("#generate");
 var passwordEl = document.querySelector("#password");
-
+// function to prompt user for password options
 function checkUserResponse(){
 
 var promptPassLength = parseInt(prompt("How long do you want the password to be? "));
@@ -46,7 +44,14 @@ if (
   alert("Must select at least one character type");
   return;
 };
-return; 
+var passOptions ={
+  promptPassLength: promptPassLength,
+  promptLowercase: promptSpecialcharac,
+  promptNumbers: promptNumbers,
+  promptSpecialcharac: promptSpecialcharac,
+  promptUppercase: promptUppercase,
+};
+return passOptions; 
 };
 
 //console log for enitre if funtions and confirms working together
@@ -182,7 +187,7 @@ function generatePass() {
   var possibleChars = [];
   var guaranteedCharacters = [];
   // if they want upper case add one to possibleChars
-  if (promptUppercase) {
+  if (options.promptUppercase) {
     possibleChars = possibleChars.concat(upperCasedCharacters);
     let randomUpper = getRandomUpper();
     guaranteedCharacters.push(randomUpper);
@@ -191,7 +196,7 @@ function generatePass() {
 
 
   // if they want lower case ...
-  if (promptLowercase) {
+  if (options.promptLowercase) {
     possibleChars = possibleChars.concat(lowerCasedCharacters);
     let randomLower = getRandomLower();
     guaranteedCharacters.push(randomLower);
@@ -199,14 +204,14 @@ function generatePass() {
 
 
   // if they want symbols ....
-  if (promptSpecialcharac) {
+  if (options.promptSpecialcharac) {
     possibleChars = possibleChars.concat(specialCharacters);
     let randomChar = getSpecialCharc();
     guaranteedCharacters.push(randomChar);
   }
 
   // if they want num ...
-  if (promptNumbers) {
+  if (options.promptNumbers) {
     possibleChars = possibleChars.concat(numericCharacters);
     let randomNumber = getRandomNumber();
     guaranteedCharacters.push(randomNumber);
