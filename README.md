@@ -1,4 +1,4 @@
-# Unit 03 JavaScript Homework: Password Generator
+# Password Generator
 
 ## Description
 
@@ -46,4 +46,4 @@ WHEN prompted for password criteria
 THEN a password is generated
 
 - - -
-© 2019 Trilogy Education Services, a 2U, Inc. brand. All Rights Reserved.
+
