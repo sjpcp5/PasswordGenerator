@@ -46,7 +46,7 @@ function checkUserResponse() {
   };
   var passOptions = {
     promptPassLength: promptPassLength,
-    promptLowercase: promptSpecialcharac,
+    promptLowercase: promptLowercase,
     promptNumbers: promptNumbers,
     promptSpecialcharac: promptSpecialcharac,
     promptUppercase: promptUppercase,
